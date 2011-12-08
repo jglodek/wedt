@@ -12,7 +12,6 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20111103141804) do
-
   create_table "bill_categories", :force => true do |t|
     t.integer  "category_id"
     t.integer  "bill_id"
@@ -41,5 +40,4 @@ ActiveRecord::Schema.define(:version => 20111103141804) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
 end

@@ -1,8 +1,10 @@
 # encoding: utf-8
 
 class Product < ActiveRecord::Base
-
 	belongs_to :bill
+	validates_presence_of :bill_id
+	validates_presence_of :cost
+	validates_presence_of :name
 	
 	#finds similar products, returns product and weight indicating level of similarity 
 	def find_similar_products()
@@ -12,7 +14,6 @@ class Product < ActiveRecord::Base
 			ld = Text::Levenshtein.distance(self.name, product.name).to_f # TO FLOAT!
 			array.push [product, ( 1/(ld*ld+1) )] #tutaj musi byc wyjatkowo dobra funkcja
 		end
-		
 		array = array.sort {|x,y| y[1] <=> x[1] }
 	end
 	
@@ -25,6 +26,9 @@ class Product < ActiveRecord::Base
 		#for each of similar products
 		similar_products.each do |product_weight|
 			#for each category of bills products is on
+			
+			puts product_weight[0].bill.to_json
+			
 			product_weight[0].bill.categories.each do |cat|
 				#add a weight of this product probability of belonging to this category
 				categories_weight[cat] ||= 0
@@ -78,6 +82,7 @@ class Product < ActiveRecord::Base
 				p = Product.new
 				p.name = array[rand(array.length-1)]
 				p.bill = b
+				p.cost = 0
 				p.save
 			end
 			for j in 1..rand(5)
@@ -85,6 +90,7 @@ class Product < ActiveRecord::Base
 				p = Product.new
 				p.name = array[rand(array.length-1)]
 				p.bill = b
+				p.cost = 0
 				p.save
 			end
 		end

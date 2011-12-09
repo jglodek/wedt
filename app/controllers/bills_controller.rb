@@ -61,7 +61,6 @@ class BillsController < ApplicationController
     respond_to do |format|
       if @bill.update_attributes(params[:bill])
         format.html { redirect_to @bill, :notice=> 'Bill was successfully updated.' }
-        format.json { :head => :ok }
       else
         format.html { render :action => "edit" }
         format.json { render :json=> @bill.errors, :status=> :unprocessable_entity }
@@ -77,7 +76,6 @@ class BillsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to bills_url }
-      format.json { :head => ok }
     end
   end
 end

@@ -1,0 +1,4 @@
+<tr id = "product-row-<%=jsform.id%>">
+	<td><%= product.name%></td>
+	<td><%= product.category%></td>
+</tr>

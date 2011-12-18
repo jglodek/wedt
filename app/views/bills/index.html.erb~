@@ -1,0 +1,14 @@
+<h1>Bills</h1>
+
+<%= link_to 'Add new bill', new_bill_path() %>
+
+<% @bills.each do |bill|%>
+
+<p><%= bill.id%> 
+<%= bill.created_at%>
+<%= bill.products.count%>
+<%= (bill.categories.collect {|cat| cat.name}).uniq.join(',') %>
+<%= link_to 'Show', bill_path(bill.id)%>
+<%=link_to 'Remove', bill_path(bill.id),:method => :delete %></p>
+
+<%end%>

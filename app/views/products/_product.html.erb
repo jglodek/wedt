@@ -1,0 +1,14 @@
+<tr id = "product-row-<%=product.id%>">
+	<td><%= product.name %></td>
+	<td>
+
+		<%= form_for product, :remote=> true do |f|%>
+		<%= f.select :category_id,
+								Category.all.collect{|cat|[cat.name, cat.id]},
+								{:include_blank => "None"},
+								:onchange => "$('#edit_product_#{product.id}').submit();" %>
+		<%end%>	
+	</td>
+	<td><%= button_to 'Delete', product_path(product.id), :method=>:delete, :remote=>true%>Suggested: <%= Category.find_by_id(Product.product_category(product.name)).name%></td>
+	
+</tr>

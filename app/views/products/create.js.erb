@@ -1,0 +1,7 @@
+<% if @ok %>
+	$("#product-table").append("<%= escape_javascript(render :partial => "product", :object => @product)%>");
+	$("#product_name").val('');
+	<% else %>
+	$("#product_name").effect("highlight",{color: 'red'}, 3000);
+<% end%>
+

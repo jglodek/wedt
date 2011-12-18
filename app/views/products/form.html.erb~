@@ -1,0 +1,12 @@
+
+<tr class = "new-product">
+<%= form_for @product, :remote => true do |f|%>
+	<td>
+		<%=f.hidden_field :bill_id%>
+		<%= f.text_field :name %>
+	</td>
+	<td><%= f.select :category, options_for_select(Category.all.collect{|cat| [cat.name, cat.id.to_s]})%></td>
+	<td><%= f.submit 'Save'%><%= f.submit 'Delete'%></td>
+<%end%>
+</tr>
+

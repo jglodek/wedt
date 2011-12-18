@@ -1,4 +1,4 @@
-class BillController < ApplicationController
+class BillsController < ApplicationController
 
 	def index
 		@bills = Bill.all
@@ -12,6 +12,10 @@ class BillController < ApplicationController
 	
 	def show
 		@bill = Bill.find_by_id(params[:id])
+		@products = @bill.products
+		@product = Product.new
+		@product.bill = @bill
+		redirect_to bills_path if !@bill
 	end
 	
 	def update_bill
@@ -19,8 +23,7 @@ class BillController < ApplicationController
 	
 	def destroy
 		b = Bill.find_by_id params[:id]
-		b.destroy
-		redirect_to bills_path
+		b.destroy if b != nil
+		redirect_to bills_path()
 	end
-	
 end

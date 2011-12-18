@@ -1,0 +1,11 @@
+<tr class = "new-product-row">
+<%= form_for(@product, :remote => true) do |f|%>
+	<td>
+		<%=f.hidden_field :bill_id%>
+		<%= f.text_field :name %>
+	</td>
+	<td></td>
+	<td><%= f.submit 'Save'%></td>
+<%end%>
+</tr>
+

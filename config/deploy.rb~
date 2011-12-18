@@ -1,3 +1,5 @@
+require 'bundler/capistrano'
+
 set :application, "wedt"
 set :repository,  "git@github.com:jglodek/wedt.git"
 set :scm, :git
@@ -18,9 +20,9 @@ set :migrate_env, 'production'
 
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "vps"                          # Your HTTP server, Apache/etc
-role :app, "vps"                          # This may be the same as your `Web` server
-role :db, "vps"
+role :web, "jglodek-vps"                          # Your HTTP server, Apache/etc
+role :app, "jglodek-vps"                          # This may be the same as your `Web` server
+role :db, "jglodek-vps"
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 

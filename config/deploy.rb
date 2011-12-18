@@ -16,6 +16,9 @@ set :use_sudo, false
 
 ssh_options[:keys] = %w(/home/deploy/.ssh/id_rsa)
 
+default_run_options[:pty] = true #PASSWROD PROMPT
+
+
 set :migrate_env, 'production'
 
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`

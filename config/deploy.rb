@@ -25,7 +25,8 @@ set :migrate_env, 'production'
 
 role :web, "jglodek-vps"                          # Your HTTP server, Apache/etc
 role :app, "jglodek-vps"                          # This may be the same as your `Web` server
-role :db, "jglodek-vps"
+role :db, "jglodek-vps", :primary => true
+
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 

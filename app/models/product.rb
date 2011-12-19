@@ -12,7 +12,7 @@ class Product < ActiveRecord::Base
 		#Associate weight of name similarity with product categorie, Fuzzyfication
 		weights = products.collect do |prod|
 			#should use levenshtein without transpositions and substitutions!
-			ld = Text::Levenshtein::distance(name, prod.name.downcase).to_f #to float!!! 
+			ld = levenshtein_distance(name, prod.name.downcase).to_f #to float!!! 
 			weight = 1/(ld*ld+1) #heuristic
 			Array[ prod.category_id, weight ]
 		end
@@ -33,38 +33,35 @@ class Product < ActiveRecord::Base
 	private
 	#customized levenshtein distance
 	#voids substitution
-	def self.levenshtein_distance(str1,str2)
-		matrix = Hash.new
-		
-		s1a = str1.split(//)
-		s2a = str2.split(//)
-		
-		s1l = str1.length-1
-		s2l = str2.length-1
+	def self.levenshtein_distance(s1,s2)
+		s1l = s1.length
+		s2l = s2.length
+		s1a = s1.split(//)
+		s2a = s2.split(//)
+		d = Hash.new
 		
 		for i in 0..s1l
-			matrix[[i,0]] = i
+			d[[i,0]]=i
 		end
-		for i in 0..s2l
-			matrix[[0,i]] = i
+		for j in 0..s2l
+			d[[0,j]]=j
 		end
 		
-		for i in 1..s1l
-			for j in 1..s2l
-				if s1a[i] = s2a[j]
-					matrix[[i,j]]= matrix[[i-1,j-1]]
+		for x in 1..s1l
+			for y in 1..s2l
+				if s1a[x-1]==s2a[y-1]
+					d[[x,y]]= d[[x-1,y-1]]
 				else
-					matrix[[i,j]] = 
-							[
-								matrix[[i-1,j]]+1, #deletion
-								matrix[[i,j-1]]+1,#insertion
-# 								matrix[[i-1,j-1]]+1 #substitution
-							]
+					d[[x,y]]=
+						[
+							d[[x-1,y]]+1,
+							d[[x,y-1]]+1,
+							#d[[x-1,y-1]]+1
+						].min
 				end
-				
 			end
 		end
-		return matrix[[s1l,s2l]]
+		return d[[s1l,s2l]]
 	end
-	
+
 end

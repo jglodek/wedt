@@ -16,13 +16,16 @@ set :use_sudo, false
 
 ssh_options[:keys] = %w(/home/deploy/.ssh/id_rsa)
 
+default_run_options[:pty] = true #PASSWROD PROMPT
+
+
 set :migrate_env, 'production'
 
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 role :web, "jglodek-vps"                          # Your HTTP server, Apache/etc
 role :app, "jglodek-vps"                          # This may be the same as your `Web` server
-role :db, "jglodek-vps"
+role :db, "jglodek-vps", :primary => true
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 

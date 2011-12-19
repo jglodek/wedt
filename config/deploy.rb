@@ -18,8 +18,7 @@ ssh_options[:keys] = %w(/home/deploy/.ssh/id_rsa)
 
 default_run_options[:pty] = true #PASSWROD PROMPT
 
-
-set :migrate_env, 'production'
+#set :migrate_env, 'production'
 
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
@@ -37,4 +36,9 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+end
+
+
+after 'deploy:update_code' do
+	 run "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
 end

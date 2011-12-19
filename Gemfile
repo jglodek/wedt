@@ -9,6 +9,8 @@ gem 'sqlite3'
 gem 'execjs'
 gem 'therubyracer'
 
+gem 'activerecord-mysql-adapter'
+
 gem 'text'
 
 # Gems used only for assets and not required

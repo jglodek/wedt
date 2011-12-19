@@ -1,6 +1,6 @@
 class BillsController < ApplicationController
   http_basic_authenticate_with :name => "wedt", :password => "masło"
-
+	
 	def index
 		@bills = Bill.all
 	end

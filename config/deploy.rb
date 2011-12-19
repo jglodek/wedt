@@ -40,5 +40,5 @@ end
 
 
 after 'deploy:update_code' do
-	 run "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
+	 system "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
 end

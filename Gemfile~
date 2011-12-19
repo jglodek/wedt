@@ -9,7 +9,7 @@ gem 'sqlite3'
 gem 'execjs'
 gem 'therubyracer'
 
-gem 'activerecord-mysql-adapter'
+gem 'mysql'
 
 gem 'text'
 

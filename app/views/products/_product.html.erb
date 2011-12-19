@@ -9,6 +9,6 @@
 								:onchange => "$('#edit_product_#{product.id}').submit();" %>
 		<%end%>	
 	</td>
-	<td><%= button_to 'Delete', product_path(product.id), :method=>:delete, :remote=>true%>Suggested: </td>
+	<td><%= button_to 'Delete', product_path(product.id), :method=>:delete, :remote=>true%> </td>
 	
 </tr>

@@ -18,6 +18,9 @@ ssh_options[:keys] = %w(/home/deploy/.ssh/id_rsa)
 
 default_run_options[:pty] = true #PASSWROD PROMPT
 
+load 'deploy/assets'
+
+
 #set :migrate_env, 'production'
 
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -39,6 +42,6 @@ namespace :deploy do
 end
 
 
-after 'deploy:update_code' do
-	system "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
-end
+#after 'deploy:update_code' do
+	#invoke_command "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
+#end

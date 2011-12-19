@@ -6,8 +6,10 @@ class Product < ActiveRecord::Base
 	validates :name, :length => {:minimum => 2}
 	#pseudo fuzzy
 	def self.product_category (name)
-		#get all products -- maybe not all? LIKE "<first letter>%"
+		
+		#get all products -- maybe change that
 		products = Product.where("category_id is not null")
+		
 		name = name.downcase
 		#Associate weight of name similarity with product categorie, Fuzzyfication
 		weights = products.collect do |prod|
@@ -27,7 +29,7 @@ class Product < ActiveRecord::Base
 		end
 		
 		#sort categories by weights
-		categories.sort {|x,y| y[1] <=> x[1]}.first[0]
+		categories.sort {|x,y| y[1] <=> x[1]}.first[0] if categories.size>0
 	end
 	
 	private

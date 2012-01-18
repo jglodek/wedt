@@ -4,7 +4,7 @@
 
 		<%= form_for product, :remote=> true do |f|%>
 		<%= f.select :category_id,
-								Category.all.collect{|cat|[cat.name, cat.id]},
+								Category.all.collect{|cat|[category_name(cat), cat.id]},
 								{:include_blank => "None"},
 								:onchange => "$('#edit_product_#{product.id}').submit();" %>
 		<%end%>	

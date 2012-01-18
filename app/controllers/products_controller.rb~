@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 	
 	def suggest_category
 		name = params[:name]
-		suggested_category = Product.product_category(name)
+		suggested_category = Category.find_by_id(Product.product_category(name))
 		render :json => suggested_category
 	end
 	
